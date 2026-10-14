@@ -9,4 +9,3 @@ Text (verbatim):
 "DARKNET MCP"
 "Dark web & threat intelligence for AI agents"
 Constraints: exactly those two text lines only, spelled correctly. No provider logos, no other repo names or promotional references, no fake dashboards or statistics, no 100% claims, no hooded criminals, no faces, no guns, no malware execution, no watermark. Full opaque background. Clean intentional finished artwork, not a wireframe or screenshot.
-
