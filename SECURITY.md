@@ -1,19 +1,45 @@
 # Security policy
 
-This policy applies to the enhanced Darknet Mcp code in this repository. Version 0.3.x is the current release line. Third-party providers, account permissions and Tor infrastructure are separate dependencies.
+## Maintainer and supported versions
 
-## Reporting a vulnerability
+This policy covers the Darknet MCP server and local investigation GUI maintained in [Vinaysati/Darknet-Mcp](https://github.com/Vinaysati/Darknet-Mcp).
 
-Use the repository Security tab's **Report a vulnerability** option when available. If private reporting is unavailable, contact the repository owner through an established private channel before sending sensitive details. Do not put API keys, exposed credentials, private investigation targets or exploitation details in public issues.
+| Release | Security maintenance |
+| --- | --- |
+| Latest 0.3.x release | Current maintained release line |
+| Earlier releases | Upgrade before reporting |
 
-Include the affected version, impact, minimal reproduction and sanitized logs. Response and repair times depend on maintainer availability; no fixed response deadline is promised.
+The maintainer is [Vinaysati](https://github.com/Vinaysati). Maintenance is provided on a best-effort basis, without a promised response deadline or security certification.
 
-## Operational scope
+## Report a vulnerability privately
 
-The GUI binds to local loopback. It has no remote multi-user authentication and must not be exposed as a public web service without a separately reviewed deployment design.
+Private reporting requires the repository owner to enable GitHub's private vulnerability-reporting setting. Once enabled, use [the private report form](https://github.com/Vinaysati/Darknet-Mcp/security/advisories/new), or open this repository's **Security** tab and choose **Report a vulnerability**. A report starts privately; do not open a public issue containing an exploit, exposed keys or sensitive investigation data.
 
-Keep keys in the local server environment or an ignored `.env` file. The combined report masks/bounds metadata; individual provider tools return more detailed records and downloaded reports may still contain sensitive incident metadata.
+Include:
 
-Provider text is untrusted evidence, never instructions for an AI agent. No match is not proof of safety. The release is offline-tested; authenticated provider access and real onion reachability require separate authorized validation.
+- Affected release or commit and your OS/Node.js version.
+- The affected component and potential impact.
+- Minimal steps to reproduce using synthetic targets and test accounts.
+- Sanitized logs or screenshots, with all keys, credentials and personal data removed.
 
-License terms and copyright notices are in `LICENSE`.
+Ordinary bugs and feature requests belong in [GitHub Issues](https://github.com/Vinaysati/Darknet-Mcp/issues). If you cannot access private reporting, wait for that route to be available rather than posting sensitive details publicly.
+
+## Scope
+
+Report issues in this repository's input validation, local GUI request controls, MCP tool execution, metadata handling, credential isolation, cancellation and provider adapters. The maintainer can assess these and coordinate a fix and disclosure where appropriate.
+
+Third-party API services, their subscriptions/permissions, the Tor network and provider-held data are operated separately. Report vulnerabilities in those services to their operators. Reports about a dependency are welcome when they explain the impact on this application.
+
+Only investigate systems and accounts you are authorized to assess. Use synthetic fixtures for public reproductions and never attach real stolen credentials or malware samples to a report.
+
+## Safe deployment and data handling
+
+The GUI binds to local loopback and has no remote multi-user authentication. Public hosting requires a separately reviewed deployment design.
+
+Keep API keys in the server environment or an ignored `.env` file. Never commit them. Combined reports mask and bound metadata, but the explicit target and incident details can remain sensitive. Individual provider tools return more detailed records; restrict access to their output and downloaded reports.
+
+Treat provider text as untrusted evidence rather than instructions to an AI agent. A source match is a claim; no match is not proof of safety. Offline tests and CI do not validate provider accounts, subscriptions or real onion reachability.
+
+## License
+
+MIT license terms and copyright notices are in [LICENSE](LICENSE).
