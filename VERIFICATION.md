@@ -24,12 +24,16 @@ Evidence rendering uses text nodes and validated source links. Hostile fixture c
 
 GUI route tests cover local Host/Origin enforcement, input/body/concurrency bounds, readiness caching, disconnect cancellation and secret-safe errors. Provider fixtures check current request methods, paths, headers, payload normalization, pagination and malformed/error responses. A mocked success does not verify a provider account or service.
 
+## GitHub upload validation
+
+Public repository: [Vinaysati/Darknet-Mcp](https://github.com/Vinaysati/Darknet-Mcp). Implementation commit: `14cdbdb7a8ad8290f581a1f26a34b55c43642f7f`. The [CI run](https://github.com/Vinaysati/Darknet-Mcp/actions/runs/38597988476) passed all four jobs: Linux/Windows with Node 22/24. Each job installed the frozen lockfile, built, ran the offline regression suite and checked the CLI. The subsequent documentation-only commit records this result without changing tested code.
+
 ## Live checks not performed
 
 - No authenticated provider access, key validity or subscription permissions were tested.
 - No onion page, real credential lookup, malware sample, scan submission or raw IntelligenceX document was retrieved.
 - Readiness probes only the configured local SOCKS5 endpoint. A successful handshake does not verify an onion site's availability or confirm that the SOCKS endpoint is the Tor network.
-- The supplied Linux/Windows and Node 22/24 GitHub CI matrix has not run in the user's account.
+
 
 The GUI and readiness report keep these distinctions visible: configured keys are not confirmed permissions; unrecognized responses are inconclusive; partial pages are not exhaustive; provider matches remain source claims. Live coverage requires the appropriate keys/licenses, current provider availability and Tor access where applicable.
 

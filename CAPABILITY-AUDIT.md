@@ -27,7 +27,7 @@ Production build passed. All 125 offline regression tests passed, including a re
 
 ## Remaining operational checks
 
-No authenticated provider request, real leaked-account lookup, onion page, malware sample or scan submission was performed. PRO Swagger confirms routes/authentication but supplies no response schemas; realistic response variants are fixture-tested and must be checked against an authorized account. The Hybrid feed also requires authenticated runtime confirmation. CI is configured for Linux/Windows and Node 22/24 but has not run in the user's GitHub account.
+No authenticated provider request, real leaked-account lookup, onion page, malware sample or scan submission was performed. PRO Swagger confirms routes/authentication but supplies no response schemas; realistic response variants are fixture-tested and must be checked against an authorized account. The Hybrid feed also requires authenticated runtime confirmation. [GitHub CI](https://github.com/Vinaysati/Darknet-Mcp/actions/runs/38597988476) passed all four Linux/Windows and Node 22/24 jobs for the uploaded implementation.
 
 Complete code does not establish exhaustive dark-web visibility or 100% detection. Scheduled monitoring, persistent cases, remote multi-user hosting and embedded AI chat are outside this local MCP/GUI release. AI interaction is supplied by an MCP client.
 

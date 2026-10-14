@@ -148,7 +148,7 @@ This release also includes:
 
 ## Validation and deployment boundary
 
-See `VERIFICATION.md` for the release's executed checks. Provider contracts are exercised with mocked network responses and the browser is checked against offline fixtures. No live authenticated provider, onion site, credential lookup, malware sample or scan submission is part of this release's validation. The supplied CI matrix still needs to run in your GitHub account.
+See `VERIFICATION.md` for the release's executed checks. Provider contracts are exercised with mocked network responses and the browser is checked against offline fixtures. No live authenticated provider, onion site, credential lookup, malware sample or scan submission is part of this release's validation. The [GitHub CI matrix](https://github.com/Vinaysati/Darknet-Mcp/actions/runs/38597988476) passed on Linux and Windows with Node 22 and 24 for the uploaded implementation.
 
 The code and local workflows can be verified without keys. Live data coverage depends on provider permissions, current service contracts and availability, and a working Tor proxy where needed. This is not a guarantee of complete visibility into the dark web or of every future provider response.
 
