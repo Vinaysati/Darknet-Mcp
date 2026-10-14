@@ -1,0 +1,12 @@
+Generation mode: built-in image_gen
+Use case: ads-marketing
+Asset type: premium GitHub repository README hero banner, wide raster illustration, approximately 3:1 aspect ratio, ideally 2400 by 800 pixels.
+Primary request: Create an exceptionally polished visual banner for DARKNET MCP, a defensive dark web and threat intelligence toolkit for AI agents.
+Scene/backdrop: cinematic charcoal and deep navy background, understated fine grid and depth, restrained teal and cyan light.
+Subject: a sculptural abstract intelligence network made of precise glowing nodes and connections, with an elegant layered onion/network metaphor and a small shield silhouette integrated into the network on the right. These are abstract security symbols, not vendor logos. Think premium editorial technology artwork, spacious and sophisticated, dimensional luminous glass and metal accents.
+Composition/framing: very wide composition, large title and subtitle on the left with generous safe margins, complex but organized intelligence network on the right, understated halo lighting and subtle reflections. All copy must remain highly readable when viewed at 900 pixels wide in a GitHub README. Use bold geometric sans-serif uppercase title in off-white, subtitle in lighter muted cyan-white. Keep title dominant; keep illustration away from the text.
+Text (verbatim):
+"DARKNET MCP"
+"Dark web & threat intelligence for AI agents"
+Constraints: exactly those two text lines only, spelled correctly. No provider logos, no other repo names or promotional references, no fake dashboards or statistics, no 100% claims, no hooded criminals, no faces, no guns, no malware execution, no watermark. Full opaque background. Clean intentional finished artwork, not a wireframe or screenshot.
+

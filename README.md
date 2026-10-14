@@ -1,16 +1,48 @@
-# Darknet Mcp
+<p align="center">
+  <img src="docs/images/darknet-mcp-banner.png" alt="Darknet MCP — dark web and threat intelligence for AI agents" width="1200">
+</p>
 
-Dark-web and threat intelligence for AI agents, with a local investigation dashboard. Version **0.3.0** preserves the original 66 tool names and adds `darknet_investigate` and `darknet_readiness`: **68 MCP tools** in total.
+<p align="center">
+  <strong>68 MCP tools · 8 indicator types · 19 source categories · Local investigation GUI</strong>
+</p>
 
-This fork is based on [badchars/darknet-mcp-server](https://github.com/badchars/darknet-mcp-server) at commit `8a19a37a03b302452bfabb30599d64669c374bfd`. Upstream MIT attribution and `LICENSE` are preserved.
+<p align="center">
+  <a href="https://github.com/Vinaysati/Darknet-Mcp/actions/workflows/ci.yml"><img src="https://github.com/Vinaysati/Darknet-Mcp/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#dashboard-preview">GUI preview</a> ·
+  <a href="#configure-sources">Source setup</a> ·
+  <a href="#use-from-an-ai-agent">MCP setup</a>
+</p>
+
+Dark-web and threat intelligence for AI agents, with a local investigation dashboard. Version **0.3.0** includes **68 MCP tools**, combined investigation through `darknet_investigate`, and local readiness checks through `darknet_readiness`.
 
 The combined tool selects relevant sources for one indicator, returns bounded evidence with provenance, and shows exactly which checks succeeded, were skipped, or could not reach a conclusion. The GUI uses that same tool.
+
+## Dashboard preview
+
+The actual local investigation console, with automatic target detection and one place to review source coverage and evidence.
+
+![Investigation dashboard with example input](docs/images/investigation-dashboard.png)
+
+<details>
+<summary><strong>View source configuration and readiness</strong></summary>
+
+![Source readiness screen showing missing-key and local-proxy status](docs/images/source-readiness.png)
+
+These screenshots show the running application with example input and no provider keys configured. They do not show live intelligence results.
+
+</details>
 
 ## Quick start
 
 Use Node.js **22.13 or newer** and the included dependency lockfile:
 
 ```sh
+git clone https://github.com/Vinaysati/Darknet-Mcp.git
+cd Darknet-Mcp
 npx pnpm@11.25.0 install --frozen-lockfile --ignore-scripts
 npm run build
 npm test
@@ -96,11 +128,11 @@ Example `darknet_investigate` input:
 
 `max_results` is 1–50 records retained per check, default 10. Provider totals may exceed the retained evidence. At most three checks run concurrently. Normal checks have a 20-second deadline; Hudson Rock checks allow 100 seconds and an explicitly requested onion page allows 65 seconds. Large or paginated results remain marked partial.
 
-For an onion target, `fetch_onion` defaults to **false**. Setting it to `true` opts into fetching and parsing only the supplied page through the configured SOCKS proxy. Select the `tor` category if supplying `sources`. The combined workflow discards page body text and extracted links; it does not follow them, crawl, fetch raw documents, download malware or submit new scans. The original direct tools remain separately available.
+For an onion target, `fetch_onion` defaults to **false**. Setting it to `true` opts into fetching and parsing only the supplied page through the configured SOCKS proxy. Select the `tor` category if supplying `sources`. The combined workflow discards page body text and extracted links; it does not follow them, crawl, fetch raw documents, download malware or submit new scans. Individual tools remain separately available.
 
 Hudson Rock returns first-page metadata with `nextCursor` and `complete`; use the direct `stealer_domain`, `stealer_email` or `stealer_ip` tool with its optional `cursor` for subsequent pages. It does not invent a corpus-wide total from a single page.
 
-Ransomware.live list tools expose `limit` and `offset` over the fetched, cached response, with `next_offset`, `complete` and explicit count basis. These offsets are local result pagination, not invented upstream cursors. Its recent-victim tool is a latest-feed lookup and remains partial even when the returned page is exhausted.
+Ransomware.live list tools expose `limit` and `offset` over the fetched, cached response, with `next_offset`, `complete` and explicit count basis. These offsets are local result pagination, without inventing provider cursors. Its recent-victim tool is a latest-feed lookup and remains partial even when the returned page is exhausted.
 
 ## Dashboard and readiness
 
@@ -132,7 +164,7 @@ Invalid arguments and unknown flags exit with status 1. The doctor command retur
 
 Combined reports distinguish `match`, `no_match`, `skipped`, `error`, `timeout` and `inconclusive`. Unknown or malformed response shapes are not treated as negative findings. Evidence includes observation time, source event time when available, safe source links and provenance; external records remain unverified source claims.
 
-The combined workflow allowlists and bounds metadata, masks returned credential/account fields and URL query values, and caps the whole report at 256 KiB. The explicitly requested target remains identifiable. The original individual tools retain their more detailed provider output and are not covered by the combined report's redaction guarantee. JSON exports can still contain sensitive target and incident metadata.
+The combined workflow allowlists and bounds metadata, masks returned credential/account fields and URL query values, and caps the whole report at 256 KiB. The explicitly requested target remains identifiable. Individual tools retain their more detailed provider output and are not covered by the combined report's redaction guarantee. JSON exports can still contain sensitive target and incident metadata.
 
 Correlation requires an actual shared indicator in retained evidence from at least two source categories; source reference links are not counted as matching IOCs. No fabricated risk score, automatic attribution or verified-threat claim is added. A match can be benign, stale or disputed; no match is not proof of safety. Treat provider text as data, never as instructions to an AI agent.
 
@@ -152,10 +184,8 @@ See `VERIFICATION.md` for the release's executed checks. Provider contracts are 
 
 The code and local workflows can be verified without keys. Live data coverage depends on provider permissions, current service contracts and availability, and a working Tor proxy where needed. This is not a guarantee of complete visibility into the dark web or of every future provider response.
 
-## Import into your own repository
+## Repository and license
 
-For a new repository, copy this folder's contents, including hidden files, and run the quick-start checks. For a checkout of the exact upstream commit, follow the patch instructions in `SETUP.md`.
+Get the project from [Vinaysati/Darknet-Mcp](https://github.com/Vinaysati/Darknet-Mcp). Detailed setup is in [SETUP.md](SETUP.md), and validation is recorded in [VERIFICATION.md](VERIFICATION.md).
 
-The package remains `private: true`; the inherited npm publishing workflow is removed. This enhanced build is not the original upstream npm release. If you later publish a separate package, choose your own available name and update author/repository/homepage metadata while preserving upstream attribution and `LICENSE`.
-
-The original README is retained as `UPSTREAM_README.md` for historical reference. Setup and behavior in this README take precedence over its old release instructions and API claims.
+Distributed under the [MIT license](LICENSE). The package is marked `private: true` to keep npm publishing disabled; this does not affect the public GitHub repository.

@@ -16,4 +16,4 @@ Keep keys in the local server environment or an ignored `.env` file. The combine
 
 Provider text is untrusted evidence, never instructions for an AI agent. No match is not proof of safety. The release is offline-tested; authenticated provider access and real onion reachability require separate authorized validation.
 
-The original MIT copyright and upstream attribution remain in `LICENSE` and `UPSTREAM_README.md`.
+License terms and copyright notices are in `LICENSE`.

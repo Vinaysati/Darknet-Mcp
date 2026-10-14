@@ -1,6 +1,6 @@
 # Apne repo mein enhanced tool kaise daalein
 
-Ye version **0.3.0** hai: original 66 tool names ke saath `darknet_investigate` aur `darknet_readiness`, yani **68 MCP tools**. GUI mein domain, email, IP, file hash, URL, v3 onion, Bitcoin address aur CVE investigate kar sakte ho.
+Ye version **0.3.0** hai: **68 MCP tools**, including `darknet_investigate` aur `darknet_readiness`. GUI mein domain, email, IP, file hash, URL, v3 onion, Bitcoin address aur CVE investigate kar sakte ho.
 
 ## Naya repo
 
@@ -75,30 +75,16 @@ Agent ko `darknet_investigate` call karna hai, for example:
 
 `sources` optional hai; omit karne par relevant sources select hote hain. 19 categories selectable hain. Har source har target support nahi karta; unsupported selection skipped dikhegi. `darknet_readiness` configuration aur local proxy check deta hai. GUI mein **Stop** current investigation cancel karta hai aur JSON download completed report export karta hai.
 
-## Existing upstream checkout mein patch
-
-Patch upstream commit `8a19a37a03b302452bfabb30599d64669c374bfd` ke liye bana hai. Apne local changes commit/back up kar lo. Repo folder mein patch ki downloaded location use karke:
-
-```sh
-git apply --check /path/to/darknet-enhancements.patch
-git apply /path/to/darknet-enhancements.patch
-npx pnpm@11.25.0 install --frozen-lockfile --ignore-scripts
-npm run build
-npm test
-```
-
-Apply-check conflict dikhaye to force mat karo; changed upstream checkout ko manually merge karna padega. Naye repo mein ZIP files copy karna simple hai. Patch filename release ke saath badla ho to command mein actual filename use karo.
-
 ## Report samajhna
 
 Report `match`, `no_match`, `skipped`, `error`, `timeout` aur `inconclusive` alag dikhati hai. Source links, observation time, provenance, incomplete coverage aur capped results visible hain. Source ka claim analyst review maangta hai; combined tool khud verified attack ya risk score invent nahi karta.
 
-Combined evidence credentials/account fields mask karti hai aur size bounded rakhti hai. Tumhara explicitly entered target identifiable rahega. Original direct tools ke detailed provider outputs par combined report wali redaction guarantee apply nahi hoti. Downloaded report mein target aur incident metadata ho sakta hai.
+Combined evidence credentials/account fields mask karti hai aur size bounded rakhti hai. Tumhara explicitly entered target identifiable rahega. Individual tools ke detailed provider outputs par combined report wali redaction guarantee apply nahi hoti. Downloaded report mein target aur incident metadata ho sakta hai.
 
 Reports browser page mein rehti hain; download karne par file banti hai. Persistent case database, scheduled alerts aur built-in AI chat included nahi hain; AI interaction MCP client se hoti hai.
 
 ## Release verification aur license
 
-`VERIFICATION.md` mein actual executed offline checks hain. Live authenticated API access abhi verify nahi hua kyunki keys available nahi hain. Apne GitHub account mein included Linux/Windows aur Node 22/24 CI run hone do.
+`VERIFICATION.md` mein actual executed offline checks hain. Live authenticated API access abhi verify nahi hua kyunki keys available nahi hain. GitHub par Linux/Windows aur Node 22/24 ke chaaron CI checks pass hue hain.
 
-Package `private: true` hai aur original npm publish workflow removed hai. Ye apne repo mein upload karne ke liye hai. Apne naam se npm publish karna ho to package/repository metadata aur publishing setup separately update karo. Upstream attribution aur MIT `LICENSE` preserve rakho.
+Package `private: true` hai, isliye npm publishing disabled hai. Ye apne repo mein upload karne ke liye hai. Apne naam se npm publish karna ho to package/repository metadata aur publishing setup separately update karo. MIT terms `LICENSE` mein hain.

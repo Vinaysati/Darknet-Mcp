@@ -1,7 +1,7 @@
-# Darknet MCP — Enhanced
+# Darknet MCP
 
 ## Purpose
-Dark-web/threat-intelligence MCP server: preserve the upstream 66 tool names, support all eight advertised capability families through `darknet_investigate`, and provide a loopback-only local GUI.
+Dark-web/threat-intelligence MCP server: keep the 68 registered tool names stable, support all eight advertised capability families through `darknet_investigate`, and provide a loopback-only local GUI.
 
 ## Architecture
 - Node.js 22.13+; TypeScript strict mode; development with Bun is optional.
@@ -19,7 +19,7 @@ Dark-web/threat-intelligence MCP server: preserve the upstream 66 tool names, su
 - Never convert an error, missing configuration, pending search or unknown response into a negative finding.
 - Retain capped metadata in combined reports, mask credentials/personal fields, and treat source claims as unverified evidence.
 - Never follow extracted links, initiate scans or download malware samples inside the combined investigation. Fetch a user-supplied onion page only when the explicit `fetch_onion` option is true; never crawl automatically.
-- Preserve upstream MIT attribution.
+- Preserve the copyright and permissions notice in LICENSE.
 
 ## Validation
 ```sh

@@ -1,8 +1,8 @@
 # Release capability audit — 0.3.0
 
-Reviewed 14 October 2026. Base: upstream `8a19a37a03b302452bfabb30599d64669c374bfd`.
+Reviewed 14 October 2026.
 
-The eight advertised capability families are implemented through the retained provider tools and the combined investigator/GUI. The original 66 tool names remain intact; combined investigation and readiness bring the registry to 68 unique tools. The code and offline verification are complete for the documented local-workstation release. Authenticated production operation is unverified because no API keys were supplied.
+The eight advertised capability families are implemented through the retained provider tools and the combined investigator/GUI. The registry provides 68 unique tools, including combined investigation and readiness. The code and offline verification are complete for the documented local-workstation release. Authenticated production operation is unverified because no API keys were supplied.
 
 | Family | Implemented combined workflow | Offline verification / live requirement |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ The previous 0.2.0 adapter and GUI gaps were corrected. Additional independent r
 
 ## Executed release evidence
 
-Production build passed. All 125 offline regression tests passed, including a real MCP client handshake and 68-tool discovery. Desktop/mobile Chrome checks passed with offline fixtures. A fresh extracted ZIP installed from the frozen lockfile, built and passed all 125 tests. The patch applied to the exact upstream source and produced byte-identical release files. Details: `VERIFICATION.md`.
+Production build passed. All 125 offline regression tests passed, including a real MCP client handshake and 68-tool discovery. Desktop/mobile Chrome checks passed with offline fixtures. A fresh extracted ZIP installed from the frozen lockfile, built and passed all 125 tests. Details: `VERIFICATION.md`.
 
 ## Remaining operational checks
 

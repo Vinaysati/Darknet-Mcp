@@ -1,6 +1,6 @@
 # Verification record
 
-Version: **0.3.0**. Upstream base: `8a19a37a03b302452bfabb30599d64669c374bfd`.
+Version: **0.3.0**.
 
 Validation is limited to code and offline fixtures, as requested. No API keys were supplied or required for the regression suite.
 
@@ -12,7 +12,6 @@ Checked on macOS with Node.js 24.19.0 and pnpm 11.25.0 on 14 October 2026.
 - Offline regression suite: **125 tests**, **125 passed; zero failures/skips**. Includes core/CLI/MCP/HTTP/cache checks, provider contracts, all eight investigation target types, target checksums, report privacy/correlation, readiness and GUI route checks.
 - Actual MCP client handshake, **68-tool** discovery and local metadata/readiness calls: **PASS — real client handshake, metadata/readiness and missing-key investigation**.
 - Frozen-lockfile installation and build/tests from the extracted source ZIP: **PASS — all 124 dependencies installed offline from the frozen lockfile; clean extracted package built and passed all 125 tests**.
-- Patch applicability against the exact upstream base above: **PASS — apply check and actual application; resulting source matched all 66 release files byte for byte**.
 
 ## Browser and route coverage
 

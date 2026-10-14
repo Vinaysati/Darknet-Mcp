@@ -48,7 +48,10 @@
     "claude",
     "llm"
   ],
-  "author": "Orhan Yildirim <contact@orhanyildirim.us> (https://orhanyildirim.us)",
+  "author": {
+    "name": "Vinaysati",
+    "url": "https://github.com/Vinaysati"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -74,11 +77,5 @@
   "packageManager": "pnpm@11.25.0",
   "bugs": {
     "url": "https://github.com/Vinaysati/Darknet-Mcp/issues"
-  },
-  "contributors": [
-    {
-      "name": "Vinaysati",
-      "url": "https://github.com/Vinaysati"
-    }
-  ]
+  }
 }
