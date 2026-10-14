@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Darknet Intel · Local investigation console</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="Darknet Intel home">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3 24 7v7c0 5-5 9-10 11C9 23 4 19 4 14V7l10-4Z" stroke="currentColor" stroke-width="1.6"/><path d="m9 14 3 3 7-7" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span>Darknet <strong>Intel</strong><small>INVESTIGATION CONSOLE</small></span>
+    </a>
+    <div class="local-badge"><span class="live-dot"></span> Local workspace</div>
+  </header>
+  <div class="app-shell">
+    <nav class="sidebar" aria-label="Workspace">
+      <p class="nav-label">WORKSPACE</p>
+      <button type="button" class="nav-button active" data-page="investigate" aria-current="page">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5"/></svg> Investigate
+      </button>
+      <button type="button" class="nav-button" data-page="sources">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><ellipse cx="10" cy="5" rx="6" ry="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M4 5v10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V5M4 10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5" stroke="currentColor" stroke-width="1.5"/></svg> Sources <span id="source-count" class="nav-count">—</span>
+      </button>
+      <div class="sidebar-footer"><span class="live-dot"></span><div>On this machine<small>API keys stay on the server</small></div></div>
+    </nav>
+    <main id="main" tabindex="-1">
+      <section id="investigate-panel" aria-labelledby="investigate-title">
+        <div class="page-intro"><p class="eyebrow">DARK WEB & THREAT INTELLIGENCE</p><h1 id="investigate-title">Connect the evidence.</h1><p>Investigate one indicator across multiple intelligence sources.<br>Review source coverage, redacted evidence, and shared indicators in one place.</p></div>
+        <form id="investigation-form" class="query-panel">
+          <div class="query-fields">
+            <div class="type-field"><label for="target-type">Indicator type</label><select id="target-type" name="target_type"><option value="auto">Detect automatically</option><option value="domain">Domain</option><option value="email">Email address</option><option value="ip">IP address</option><option value="hash">File hash</option><option value="url">URL</option><option value="onion">Tor onion address</option><option value="bitcoin">Bitcoin address</option><option value="cve">CVE identifier</option></select></div>
+            <div class="target-field"><label for="target">Target</label><input id="target" name="target" type="text" placeholder="e.g. example.com" required maxlength="2048" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="target-help"></div>
+            <button type="submit" id="investigate-button" class="primary-button">Start investigation <span aria-hidden="true">↗</span></button>
+          </div>
+          <p id="target-help" class="field-help">Enter a domain, email, IP, file hash, URL, onion address, Bitcoin address, or CVE identifier.</p>
+          <div id="onion-options" class="onion-options" hidden><label class="checkbox-label"><input id="fetch-onion" type="checkbox"> Fetch supplied onion page through Tor</label><p class="field-help">One page only, with a bounded response and timeout. Extracted links are not followed. Without this option, only lookup records are checked.</p></div>
+          <details class="options"><summary>Investigation options</summary><div class="options-content"><div><label for="max-results">Maximum evidence per source</label><input id="max-results" type="number" value="10" min="1" max="50" required><p class="field-help">Limits report size. Providers may return less evidence.</p></div><fieldset><legend>Source coverage</legend><label class="checkbox-label"><input id="automatic-sources" type="checkbox" checked> Select relevant sources automatically</label><div id="source-options" class="source-options" hidden></div><p class="field-help">Sources without required keys are listed as skipped.</p></fieldset></div></details>
+        </form>
+        <div id="run-status" class="run-status" role="status" aria-live="polite" hidden></div>
+        <button id="stop-investigation" class="secondary-button stop-button" type="button" hidden>Stop investigation</button>
+        <div id="run-error" class="error-banner" role="alert" hidden></div>
+        <section id="empty-state" class="empty-state" aria-label="Ready to investigate"><svg width="60" height="60" viewBox="0 0 60 60" fill="none" aria-hidden="true"><circle cx="30" cy="30" r="20" stroke="currentColor"/><circle cx="30" cy="30" r="9" stroke="currentColor"/><path d="M30 4v12m0 28v12M4 30h12m28 0h12" stroke="currentColor"/></svg><h2>Start with an indicator</h2><p>Completed checks, missing configuration, and provider errors<br>will be shown separately in your report.</p><span class="subtle-label">LIVE SOURCE LOOKUPS · CREDENTIALS REDACTED</span></section>
+        <section id="report-panel" aria-labelledby="report-title" hidden>
+          <div class="report-header"><div><p class="eyebrow">INVESTIGATION REPORT</p><h2 id="report-title"></h2><p id="report-date" class="muted"></p></div><button id="download-report" class="secondary-button" type="button">Download JSON <span aria-hidden="true">↓</span></button></div>
+          <div id="coverage-metrics" class="metrics" aria-label="Coverage summary"></div>
+          <p id="coverage-note" class="coverage-note"></p>
+          <div id="correlations-panel" class="section-panel" hidden><div class="section-heading"><h3>Shared indicators</h3><span class="subtle-label">CROSS-SOURCE CONNECTIONS</span></div><div id="correlations"></div></div>
+          <details id="followups-panel" class="limitations" open hidden><summary>Follow-up actions and coverage gaps</summary><ul id="followups"></ul></details>
+          <div class="section-heading"><h3>Source checks</h3><span id="checks-caption" class="subtle-label"></span></div>
+          <div id="checks" class="checks"></div>
+          <details id="limitations-panel" class="limitations" open><summary>Report limitations</summary><ul id="limitations"></ul></details>
+        </section>
+      </section>
+      <section id="sources-panel" aria-labelledby="sources-title" hidden>
+        <div class="page-intro"><p class="eyebrow">SOURCE CONFIGURATION</p><h1 id="sources-title">Know your coverage.</h1><p>Configuration comes from the server environment.<br>Key presence does not confirm provider health or account permissions.</p></div>
+        <div class="info-banner"><strong>API keys stay on this machine.</strong> Configure keys in your server environment and restart the server. Local readiness checks inspect registration, configuration, and the Tor proxy; they do not authenticate to intelligence providers.</div>
+        <div class="readiness-heading"><div><h2>Local readiness</h2><p id="readiness-date" class="muted">Loading local checks…</p></div><button id="refresh-readiness" class="secondary-button" type="button">Refresh checks</button></div>
+        <div id="readiness-status" class="info-banner" role="status" aria-live="polite"></div>
+        <div id="readiness-checks" class="source-list"></div>
+        <div class="section-heading"><h3>Provider configuration</h3></div>
+        <div id="source-list" class="source-list"></div>
+      </section>
+      <footer class="page-footer">Darknet MCP · local console <span>Review source evidence before taking action.</span></footer>
+    </main>
+  </div>
+</body>
+</html>

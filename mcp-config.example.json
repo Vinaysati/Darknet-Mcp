@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "darknet-enhanced": {
+      "command": "node",
+      "args": [
+        "--env-file=/absolute/path/to/darknet-mcp-enhanced/.env",
+        "/absolute/path/to/darknet-mcp-enhanced/dist/index.js"
+      ]
+    }
+  }
+}
