@@ -87,4 +87,4 @@ Reports browser page mein rehti hain; download karne par file banti hai. Persist
 
 `VERIFICATION.md` mein actual executed offline checks hain. Live authenticated API access abhi verify nahi hua kyunki keys available nahi hain. GitHub par Linux/Windows aur Node 22/24 ke chaaron CI checks pass hue hain.
 
-Package `private: true` hai, isliye npm publishing disabled hai. Ye apne repo mein upload karne ke liye hai. Apne naam se npm publish karna ho to package/repository metadata aur publishing setup separately update karo. MIT terms `LICENSE` mein hain.
+Package `@vinaysati/darknet-mcp` GitHub Packages ke liye configured hai. `Publish npm package` workflow build/tests aur extracted package verify karne ke baad publish karti hai. GitHub npm registry se install karne ke liye `read:packages` wala classic token aur npm login chahiye; token repo/chat mein mat rakho. Install instructions README mein hain. MIT terms `LICENSE` mein hain.

@@ -1,13 +1,24 @@
 {
-  "name": "darknet-mcp",
+  "name": "@vinaysati/darknet-mcp",
   "version": "0.3.0",
   "description": "Dark web intelligence MCP server \u2014 HIBP, ThreatFox, ransomware tracking, Tor .onion access, blockchain intel, exploit search, stealer logs, malware analysis",
   "type": "module",
   "bin": {
-    "darknet-mcp-server": "dist/index.js"
+    "darknet-mcp-server": "dist/index.js",
+    "darknet-mcp": "dist/index.js"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "LICENSE",
+    "README.md",
+    "SECURITY.md",
+    "SETUP.md",
+    "VERIFICATION.md",
+    "CAPABILITY-AUDIT.md",
+    "CHANGELOG.md",
+    "mcp-config.example.json",
+    ".env.example",
+    "docs/images/"
   ],
   "scripts": {
     "dev": "bun --watch run src/index.ts",
@@ -70,12 +81,15 @@
     "@types/node": "^22.15.3",
     "typescript": "^5.8.2"
   },
-  "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "packageManager": "pnpm@11.25.0",
   "bugs": {
     "url": "https://github.com/Vinaysati/Darknet-Mcp/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   }
 }

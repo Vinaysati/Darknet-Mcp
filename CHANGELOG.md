@@ -11,6 +11,8 @@ Repository distribution: Vinaysati/Darknet-Mcp; contribution/security guidance a
 
 ### Added
 
+- Scoped GitHub npm package `@vinaysati/darknet-mcp`, manual publication workflow, packed-runtime checks and an additional `darknet-mcp` CLI alias.
+
 - `darknet_readiness` and the `--doctor` CLI report for tool/key configuration and a local SOCKS5 handshake. Provider authentication and live upstream health are explicitly unverified.
 - URL, checksum-valid v3 onion, checksum-valid mainnet Bitcoin and CVE investigation targets, completing eight combined target types with `auto` detection and 19 selectable source categories.
 - Explicit `fetch_onion` opt-in for one supplied page; no link following or crawling. Metadata remains the default onion workflow.

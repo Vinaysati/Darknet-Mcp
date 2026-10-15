@@ -36,6 +36,23 @@ These screenshots show the running application with example input and no provide
 
 </details>
 
+## Install the GitHub package
+
+Package: `@vinaysati/darknet-mcp`, published to GitHub Packages rather than npmjs.org. Use Node.js 22.13+.
+
+GitHub's npm registry requires authentication for downloads, including public packages. Use a personal access token (classic) with `read:packages` as the password when the login prompt requests it. Keep tokens out of repository files and chat.
+
+```sh
+npm config set @vinaysati:registry https://npm.pkg.github.com
+npm login --scope=@vinaysati --auth-type=legacy --registry=https://npm.pkg.github.com
+npm install --global @vinaysati/darknet-mcp@0.3.0
+darknet-mcp --gui
+```
+
+Open http://127.0.0.1:4318. For MCP stdio, run `darknet-mcp` with no flags. Export provider keys in the server environment; package installation does not configure source accounts or Tor.
+
+[View GitHub Packages](https://github.com/users/Vinaysati/packages?repo_name=Darknet-Mcp). Source installation remains available below.
+
 ## Quick start
 
 Use Node.js **22.13 or newer** and the included dependency lockfile:
@@ -188,4 +205,4 @@ The code and local workflows can be verified without keys. Live data coverage de
 
 Get the project from [Vinaysati/Darknet-Mcp](https://github.com/Vinaysati/Darknet-Mcp). Detailed setup is in [SETUP.md](SETUP.md), and validation is recorded in [VERIFICATION.md](VERIFICATION.md).
 
-Distributed under the [MIT license](LICENSE). The package is marked `private: true` to keep npm publishing disabled; this does not affect the public GitHub repository.
+Distributed under the [MIT license](LICENSE). The scoped package is configured for GitHub Packages. Publication is performed by the manually triggered `Publish npm package` workflow after build, offline tests and extracted-package checks pass. The workflow publishes only to `https://npm.pkg.github.com`.

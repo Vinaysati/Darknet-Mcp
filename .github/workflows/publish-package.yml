@@ -1,0 +1,65 @@
+name: Publish npm package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-npm-package
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@vinaysati'
+      - run: npm install --global pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Build and offline regression tests
+        run: pnpm run check
+      - name: Pack the installable runtime
+        run: |
+          mkdir package-out
+          npm pack --json --pack-destination package-out > package-out/manifest.json
+      - name: Verify the extracted CLI, MCP and GUI
+        run: node scripts/verify-package.mjs package-out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: darknet-mcp-npm-package
+          path: package-out/*
+          if-no-files-found: error
+      - name: Publish verified archive to GitHub Packages
+        run: npm publish package-out/*.tgz --ignore-scripts --registry=https://npm.pkg.github.com --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify registry version
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
+          const packed = JSON.parse(readFileSync('package-out/manifest.json', 'utf8'))[0];
+          const spec = pkg.name + '@' + pkg.version;
+          const integrity = execFileSync('npm', ['view', spec, 'dist.integrity', '--registry=https://npm.pkg.github.com'], { encoding: 'utf8' }).trim();
+          assert.equal(integrity, packed.integrity, 'Published archive integrity mismatch');
+          console.log('Registry verified: ' + spec + ' matches the checked archive.');
+          JS
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Report package visibility
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api '/users/Vinaysati/packages?package_type=npm' --jq '.[] | select(.name == "darknet-mcp" or .name == "@vinaysati/darknet-mcp") | {name,visibility,html_url,repository:.repository.full_name}'
