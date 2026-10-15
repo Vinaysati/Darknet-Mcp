@@ -41,7 +41,7 @@ jobs:
           path: package-out/*
           if-no-files-found: error
       - name: Publish verified archive to GitHub Packages
-        run: npm publish package-out/*.tgz --ignore-scripts --registry=https://npm.pkg.github.com --access public
+        run: npm publish ./package-out/*.tgz --ignore-scripts --registry=https://npm.pkg.github.com --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Verify registry version
